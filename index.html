@@ -1,22 +1,16 @@
 <!doctype html>
-<!-- JamoDevNich Status Portal Template, (c) Nicholas Elliott, Revision 1.0.3 -->
+<!-- JamoDevNich Status Portal Template, (c) Nicholas Elliott, Revision 1.0.5 -->
 <html lang="en">
 <head>
 	<title>Welcome</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script src="https://code.jquery.com/jquery-3.4.0.slim.min.js" integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI=" crossorigin="anonymous"></script>
+	<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB3ElEQVQ4jY3QP2gTUQDH8V/rNVFic+AiLrXERpKGeNea1hxW+uq1ib02Nf1zcLoZRAmoSBZBHETB4uQiZBEeFMRFvJglOhUHB8FNSmlmB8FBwUkcfl165/PaqgcfHsf78R0evCqkVwV3WUQNke9yFaa6uVSFD7cC6VbAqJUK3rplHFEDrgMzsvPx4Fas06hpXJkHl5w/Lc+irgaqDszIxke3rbPb1nmv3seFEqLeLZVxLAzMwFTvL5aUwNrqITo26Nj4unPSscHZ87gRBOanIdQ7x4YMAx9fJFlzD7AkcL9xReP7tX52mgkuzPR8EQIHAeCCgChNgoGyUAKBzZb+Wf3vNBNcLPfeAYDpCQj7HKjYHdjLm2bi192rOCosZCYtMFT8z8Cnl0k6U72PikUMToyDgbNnIPHhefL7ZuvvgceNOK1RfBsfQaE4CiokxgzIKauHq7fj3Cu08UqndRosGGDBgL9zsmCAYwYkzBykmQPNHOjNadx6rf+MRmrLGoNNhEQ+A5nPgIHWk8NPo4H1Z/18eDNOb06jOfx7m8/Cx3AaMpsGAyOnYHfb+o/93uOa2xdus0PwkU5BnkyBgaFBiG5bX98vUPdiVPY+UgOQqQEw8K/AdTcWbk8ch78NaJSpoDl/I7IAAAAASUVORK5CYII=" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,300,400" />
-	<style media="screen">
-		.flexContainer, body {
-			display:flex;
-		}
-
-		.flexDisplayColumn, body {
-			flex-direction: column;
-		}
-
-		.contentOverflowNone, body {
-			overflow:hidden;
+	<style media="all">
+		.divTextBackground {
+			display: none;
 		}
 
 		.textAlignCenter {
@@ -53,6 +47,19 @@
 
 		.textSizeNormal {
 			font-size: 18px;
+		}
+	</style>
+	<style media="screen">
+		.flexContainer, body {
+			display:flex;
+		}
+
+		.flexDisplayColumn, body {
+			flex-direction: column;
+		}
+
+		.contentOverflowNone, body {
+			overflow:hidden;
 		}
 
 		.elemNotSelectable {
@@ -116,10 +123,6 @@
 			animation: 0.6s ease-out 0s 1 normal divErrorMessage;
 		}
 
-		div.divTextBackground {
-			display: none;
-		}
-
 		a.anchorButton {
 			text-decoration: none;
 			color:inherit;
@@ -135,9 +138,24 @@
 			transition: background-color 0.2s ease;
 		}
 
-		a.anchorButton:hover{
+		a.anchorButton:hover {
 			background-color: #022735;
 			transition: background-color 0.2s ease;
+		}
+
+		@keyframes anchorButtonLoading {
+			0% { background-position: 200%, 0%; }
+			100% { background-position: 0%, 0%; }
+		}
+
+		a.anchorButton.loading {
+			color: #163a48;
+			background-color: #001923;
+			background-image: linear-gradient(90deg, #001923, #01212d, #001923);
+			background-size: 200%, 100%; /* Width, Height */
+			background-repeat: repeat-x;
+			background-position: 0%, 0%;
+			animation: 1s linear 0s infinite normal anchorButtonLoading;
 		}
 	</style>
 	<style media="screen and (min-width: 800px)">
@@ -166,6 +184,16 @@
 			max-height: 70vh;
 		}
 	</style>
+	<style media="screen and (max-width: 799px)">
+		.elemWidthRestricted {
+			padding-left: 5vw;
+			padding-right: 5vw;
+		}
+
+		a.anchorButton {
+			width: 80vw;
+		}
+	</style>
 </head>
 <body>
 	<div class="flexSpacer">
@@ -175,12 +203,12 @@
 		</div>
 		<div class="flexSpacer textAlignCenter divErrorMessage elemIndexMid">
 			<h1 class="elemNotSelectable textWeight100 textCaseLower textSizeHeader">
-				JamoDevNich.github.io
+				Hey there!
 			</h1>
 			<p class="textWeight400 textSizeNormal elemWidthRestricted">
-				I'm not currently using this repository, would you like to navigate to my main website instead?
+				I'm not currently using this repository, would you like to visit my main website instead?
 			<p class="elemDistanceLayout">
-				<a class="anchorButton" title="Navigate to my main website" href="https://nich.dev">Take me there</a>
+				<a class="anchorButton animatable" title="Navigate to my main website" href="https://nich.dev">Take me there</a>
 		</div>
 		<div class="flexSpacer">
 		</div>
@@ -191,8 +219,12 @@
 		Copyright 2017-2019 JDN
 	</div>
 
-	<div class="divTextBackground elemIndexBottom elemNotSelectable textWeight100 textCaseLower">
+	<!--div class="divTextBackground elemIndexBottom elemNotSelectable textWeight100 textCaseLower">
 		Welcome
-	</div>
+	</div-->
+
+	<script>
+		var timestamp=Date.now()/1e3|0,buttonLoadingReset=setInterval(function(){var t=Date.now()/1e3|0;1<t-timestamp&&$("a.animatable").removeClass("loading").html("Take me there"),timestamp=t},100);$("a.animatable").click(function(t){t.preventDefault(),$(this).addClass("loading").html("Teleporting...");var a=this;setTimeout(function(){window.location=$(a).attr("href")},700)});
+	</script>
 </body>
 </html>
